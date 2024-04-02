@@ -1085,7 +1085,7 @@ kashmir |>
 
 ***
 
-To give a more detailed look into the temporal changes of the songs, we look at the temprograms of the live and studio versions of the songs.
+To give a more detailed look into the temporal changes of the songs, we look at the temprograms of the live and studio versions of the songs. In the live version of Stairway to heaven we see a lot of temporal change, especially in the beginning. In the studio version we see a much more clear indication of tempo, but a ascending tempo overall. The live version of Rock n Roll really has a super constant tempo, which is around 170 BPM. The studio version has a less clear BPM. The live version of Dazed and confused is a true tempo dungeon, constant tempos can be seen at different bpm levels, ranging from 170 to 400! We can clearly see the experimental phase of the song, from 500-1000 seconds where there is no clear tempo at all. The studio version  does not have that much different BPM levels and also is much less clear when it comes to BPM. The studio and live version tempograms of Kashmir are nearly identical, with similar bpm levels.
 
 ***
 
@@ -1093,8 +1093,8 @@ To give a more detailed look into the temporal changes of the songs, we look at 
 Stairway to heaven live version
 
 ```{r}
-tempogram1 <- readRDS(file = "data/tempogram1.RDS")
-tempogram1
+tempo1 <- readRDS(file = "data/tempogram1.RDS")
+tempo1
 ```
 
 
@@ -1352,7 +1352,7 @@ livevsstudio |>
 
 
 
-# Clustering Live & Stdudio Versions Text
+# Clustering Live & Studio Versions Text
 
 ***
 
