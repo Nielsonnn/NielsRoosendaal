@@ -26,10 +26,71 @@ library(heatmaply)
 
 
 # Background
+***
+
+In this portfolio I will compare 4 essential Led Zeppelin songs and analyse why the live versions in my opinion sound better than the studio versions. For the research I will use 3 live versions from the legendary concert in 1973 at Madison Square Garden, many people think the band is at their prime in this period. For the bonus track I have chosen a song from the reunion concert in 2012: Kasmir live at O2 to see is they still create the same live atmospheres as 41 years before this.
+
+1. "Stairway to Heaven":
+"Stairway to Heaven" is the most iconic and well-known songs, elements such as intricate composition and emotional depths are well-known elements. The studio version has a multi layered production with a lot of well-crafted dynamics. This is transferred to the live version in a great way, extending the guitar solo and more improvisation while keeping the emotional nature of the song.
+
+2. "Dazed and Confused":
+“Dazed and confused” has the most experimental, improvisational nature of all the 4 songs. The studio version shows the bowing techniques of Jimmy Page with a very hypnotic use off the bass by John Paul Jones. The Live performance I use for this portfolio stretches almost to the 30-minute mark. The version uses a lot of experimentalism with switches in tempo and key. It really captures the creative musical energy of the band at it’s prime. 
+
+3. "Rock and Roll":
+“Rock and roll” is a more easy going led zeppelin song, with a constant 4/4 rhythm. The studio version of the song really does not do the band justice, while the live version really captures the energy of the band; the expressive guitar playing parts of Jimmy Page, the screeching vocals of Robert Plant, the hypnotic bass parts of John Paul Jones and the thunderous drumming of John Bonham. 
+
+4. "Kashmir":
+“Kashmir” is a very original track, this is due to its rhythm (main guitar riff is in 6/8 while the drums play in 4/4). The song has a lower tuning than the other songs, the guitar of Page is tuned to DADGAD, giving the song a very heavy feel. The song also uses a lot of orchestral elements. We will delve into the studio and live version of the song, inspecting these elements.
+
+***
 
 # Tracklevel Features
 
 
+***
+Spotify Track-level Features
+
+Tempo
+When we look at the tempo of the tracks we see a couple of things;
+- The live versions have a overall faster tempo than the studio versions
+- The range of tempo’s from the live versions is much higher, but without an outlier
+- The studio versions have a very low median tempo, compared to the live versions 
+- The studio versions have a huge outlier, faster than any song, which is the song: Rock and Roll remaster. according to R studio
+
+Acousticness
+Here are a vew points to make when looking at acousticness;
+- Led zeppelin does not use “acoustic” instruments during live versions, only amplified instruments such as electric -and bass guitars. 
+- Because of this there is slim to none activity from the live songs in the acoustic range, only one outlier which is the song: !!!
+- For the studio versions there is a lot of activity, a huge range of acousticness  from around 0,1 to 0,5 and a median around 2,5
+
+Liveness
+The results of the “liveness” section should really come as no surprise;
+- The range of the live songs is from around 87,5 to 95, with one outlier which is the song: Rock and Roll (Live at MSG 1973).
+- The range of “liveness” for the studio songs is around 0.08-0.1 for all of the songs 
+
+Danceability
+The music from the band really is not your typical music to dance to, still there are some interesing things to write down about the ‘danceability’ of the tracks
+- The danceability of the live tracks is relatively low, with no outlier(s), around 0.2 to 0.33 with a median of 0,27
+- The danceability of the studio tracks on the other hand is much higher, with a range of 0.31 to 0,375 and a median of 0,326.
+- The studio tracks also have an outlier with a danceability of around 0,483 which is the song: Kashmir - remaster. To me this is very interesting, given the fact that the song has a very slow rhythm: in 6/8 and 80bpm which are two traits that are not synonymous with ‘dance’ music …….
+
+Valence
+Valence, referring to the mood of a song: positive or negative, is interesting to see with these songs.
+- The is a very small range with the live songs’ valence, from around 0.2 to 0,27
+- The studio versions on the other hand have a valence ranging from 0,375 to 0,65, much higher than the live versions. The aggressive, live nature of these performances and less aggressive, more gentle and moody nature of the studio versions might be the reason for this.
+
+Loudness
+You would think that the live versions are louder than the studio versions, which is the case but the difference is smaller than you would think;
+- Live versions’ loudness has a range of -8,5 to -7,7 while the studio versions range from -10,1 to -8,2. 
+- There is a significant outlier in the live version category: Rock and Roll - Live at MSG 1973 (loudness: -6.339)
+- There is an even more significant outlier in the studio versions category:   Stairway to heaven - remaster (Loudness: -12.049)  
+
+Instrumentalness
+Instrumentalness is a very interesting section;
+The live versions have a range from 0,03 to 0,2 with a median of 0,70 while there is not even a range in the studio versions, however there is one studio version song with a very small amount of ‘Instrumentalness’: Dazed and confused 1990 remaster (0,009600)
+The most “instrumental” song according to R Studio is the live version of the same song, Dazed and confused live at MSG 1973 with a whopping Instrumentalness of 0,499000
+
+***
 
 ```{r}
 
@@ -119,8 +180,29 @@ songs |>
 
 
 
-
 # Chroma level features Live Versions
+
+***
+
+Live Versions
+
+Stairway to heaven:
+- We can see that the intensity or magnitude of the key “A” is the most prominent here, the piece is in A minor so this is no surprise. There is also a lot of C in the first 2/3 of the version. We can clearly see where the guitar solo starts, because the chord progression here is A - G - F. The piece ends on a clear A minor sequence. 
+
+Rock n roll
+- The version has a lot of harmonic stuff going on. The piece is officially in A major, but the live version seems to have a lot of focus on the key of E 
+- You can also clearly see when the sequences of D major come through
+- There really is not a note that is not used throughout this version, only B falls a little bit short of the rest (chaotic nature)
+
+Dazed and confused
+- We can see the descending bassline in the little yellow magnitude spots (beginning). 
+- The song is in E major, what we can heat after about 5 minutes
+- This version is 30 minutes long with experimental sequences where Jimmy page for example plays violin on an electric guitar. Around 1000 seconds there really is not a clear key, sometimes an E note or chord to give some sort of indication
+
+Kashmir
+- This live version is unique in its chroma level features, it has without a doubt the clearest differences in magnitude. There is almost no lighter version of blue and a true contrast in colour. The beginning section of the song is in D, but due to tunings of instruments it is also read as C#/Db. This lower tuning probably has to do with the range of the lead singer Robert Plant changing through the years (This is a 2012 version). The next section though is clearly A major, followed by a A-G section which we hear clearly in the song
+
+***
 
 ## Stairway to heaven Live version
 
@@ -250,8 +332,34 @@ kashmiro2 |>
 
 
 
-
 # Chroma level-features Studio Versions
+
+
+***
+
+Studio Versions
+
+Stairway to Heaven
+- There really is not much difference from the live version’s chroma level-features, there are slight differences
+- The differences in magnitude are clearer to see here, the version is less chaotic (no crowd noise for example) which may be the answer to this, though the ending section of the live version is more prominent A minor then the studio version.
+- The solo section is shorter, which is a trademark for the band to really stretch their solo sequences during live performances
+
+Rock n roll
+- As expected, a clearer representation of the magnitudes of keys and notes
+- Here we can clearly see that the song is in A major which was not the case for the live version
+- G#/Ab had a very prominent role in this version while that is surely not the case in the live version, it may be the case that the song is some cents lower than A major. Because of this the chroma level features are read like this (also the case for D & C#/Db), this can be a result of the studio engineering process
+
+Dazed and Confused
+- The much shorter studio version has a very clear depiction of the descending bassline; it looks like a pattern. The difference in magnitude is as clear as in the other studio versions
+- There is also an experimental sequence in this song with a lot of different notes, but with a clear key: G major. This was not the case with the live version. For the rest of the song, we can see that the main key is E, but this is only really concluded in the last 10-15 seconds
+
+Kashmir
+- There really is not anything special to this version next to the live version, according to the chroma level features
+- The song is clearly in D major, but A Major also plays a role in the beginning part of the song, and the rest of the song
+- There is more going on with different notes etc
+
+***
+
 
 ## Stairway to heaven Studio version
 Stairway to heaven Studio version
@@ -370,8 +478,6 @@ kashmir |>
   theme_minimal() +
   scale_fill_viridis_c()
 ```
-
-
 
 
 
@@ -558,6 +664,8 @@ dazedmsg |>
 
 # Timbre features Cepstrograms Studio Versions
 
+
+
 ## Stairway to heaven studio version
 Stairway to heaven studio version
 
@@ -733,6 +841,30 @@ kashmir |>
 
 # Timbre: Self-Similarity Matrixes Live Versions
 
+***
+
+Live versions
+
+Stairway to heaven
+- We can see a lot of similarities in the first 300 seconds, but there is some variation in the guitar for example
+- We can clearly see when the drums kick in, after 300 seconds, there is more variation in the song with more yellow lines
+- After around 350 seconds we can see a very dark blue block which represents the guitar solo with a clear key; A minor and a continuous drumming pattern.
+
+Rock n roll
+- We see a matrix with a huge amount of “repetitiveness”, the song is almost all of the time in A major so this should come as no surprise. 
+- We see 2 clear moments of variation: around 95 seconds and 175 where it is the case that the vocalist adds extra vocal lines or there is no guitar/ bass and only drums with vocals.
+- We can see variation in the end where John Bonham does a drum solo
+
+Dazed and confused
+- The matrix goes up to a whopping 1750 seconds 
+- There is a huge amount of variation to see, especially around the 600 second (violin part) mark which comes as no surprise given the experimental nature of the song and version. 
+
+Kashmir
+- This matrix is very interesting to look at because it seems even more repetitive than the “Rock n roll” matrix. There are clear variations around 120 and 375 seconds which are the descending pieces, while the main riff which goes on for most of the song is ascending. 
+- The version ends on a different note than D (A), which is the variation we can see in the end.
+
+***
+
 ## Stairway to heaven LIve version
 Stairway to heaven LIve version
 
@@ -830,6 +962,29 @@ kashmiro2 |>
 
 # Timbre: Self-Similarity Matrixes Studio Versions
 
+***
+
+Studio
+Stairway to heaven
+- Until second 330 there is a clear part with a very noticeable variation around the 90th second. This may be the sudden variation of the keys we hear during this time. 
+- We can clearly see the start of the guitar solo, around 320-330 seconds, but it is less dark blue (repetitive) with a clear representation of the singing part “And as we wind on down the road..”. 
+- Overall, a version with less variation and less repetitiveness. 
+
+Rock n roll
+- In this matrix we can see less repetitiveness, and a little variation
+- After 200 seconds we can see a part where there is some variation though, whereas said the percussionist does a drum solo
+
+Dazed and confused
+- This version appears as a summary of the live version, with clear changes of pace around the 210 and 300 second mark (where the tempo fastens, and the guitar solo is played). 
+- Overall this version of the self-similarity matrix is much more clear to see, but also less interesting to analyse because of the less occasions of variations and tempo changes etc.
+
+Kashmir
+- First thing we see right away is the amount of variation, there is way more than in the live version. This probably has to do with the fact that there is a lot more vocal variation from Robert Plant. 
+- We can also see the clear changes in sections, 50 seconds, 110 seconds etcetera. 
+- Here there is no ending on a different note. The song just fades away.
+
+***
+
 ## Stairway to heaven studio version
 Stairway to heaven studio version
 
@@ -924,7 +1079,108 @@ kashmir |>
 
 
 
-# Temporal (zie chromatic zooi)
+
+
+# Temporal features: Tempograms Live
+
+***
+
+To give a more detailed look into the temporal changes of the songs, we look at the temprograms of the live and studio versions of the songs.
+
+***
+
+## Stairway to heaven live version
+Stairway to heaven live version
+
+```{r}
+tempogram1 <- readRDS(file = "data/tempogram1.RDS")
+tempogram1
+```
+
+
+
+## Rocknroll Live version
+Rocknroll Live version
+
+```{r}
+tempogram2 <- readRDS(file = "data/tempogram2.RDS")
+tempogram2
+```
+
+
+
+
+## Dazed and confused Live version 
+Dazed and confused Live version 
+
+```{r}
+tempogram3 <- readRDS(file = "data/tempogram3.RDS")
+tempogram3
+```
+
+
+
+## Kashmir O2 Live version
+Kashmir O2 Live version
+
+```{r}
+tempogram4 <- readRDS(file = "data/tempogram4.RDS")
+tempogram4
+```
+
+
+
+
+# Temporal features: Tempograms Studio
+
+## Stairway to heaven studio version
+Stairway to heaven studio version
+
+```{r}
+tempogram5 <- readRDS(file = "data/tempogram5.RDS")
+tempogram5
+```
+
+
+## Rock n Roll Studio Version
+Rock n Roll Studio Version
+
+```{r}
+tempogram6 <- readRDS(file = "data/tempogram6.RDS")
+tempogram6
+```
+
+
+## Dazed and confused studio version
+Dazed and confused studio version
+
+```{r}
+tempogram7 <- readRDS(file = "data/tempogram7.RDS")
+tempogram7
+```
+
+
+
+## Kashmir studio version
+Kashmir studio version
+
+```{r}
+tempogram8 <- readRDS(file = "data/tempogram8.RDS")
+tempogram8
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -936,6 +1192,16 @@ kashmir |>
 
 
 # Loudness
+
+***
+
+Loudness 
+
+When we look at the loudness of the tracks we see no real surprises. The loudness of the live tracks are more intense in every case when comparing them to the studio versions. 
+
+The most intense difference in loudness can be seen at Stairway to heaven (Live: -8,75, Studio: -12) while the smallest difference in loudness is the case with Kashmir (Live: -8,15, Studio: -8,6)
+
+***
 
 ## Stairway to Heaven
 
@@ -1040,13 +1306,254 @@ songs |>
 
 
 
-# Clustering
+# Track level summaries
+
+```{r}
+live <-
+  get_playlist_audio_features(
+    "",
+    "4afgGgLtvmGtVJI31iDcTe"
+  ) |>
+  slice(1:30) |>
+  add_audio_analysis()
+studio <-
+  get_playlist_audio_features(
+    "",
+    "3saRK9UE5HSJRLBDxj2HEl"
+  ) |>
+  slice(1:30) |>
+  add_audio_analysis()
+livevsstudio <-
+  live |>
+  mutate(genre = "live") |>
+  bind_rows(studio |> mutate(genre = "studio"))
+```
+
+
+```{r}
+livevsstudio |>
+  mutate(
+    timbre =
+      map(
+        segments,
+        compmus_summarise,
+        timbre,
+        method = "mean"
+      )
+  ) |>
+  select(genre, timbre) |>
+  compmus_gather_timbre() |>
+  ggplot(aes(x = basis, y = value, fill = genre)) +
+  geom_violin() +
+  scale_fill_viridis_d() +
+  labs(x = "Spotify Timbre Coefficients", y = "", fill = "Genre")
+```
 
 
 
-## Hierarchical clustering
+
+# Clustering Live & Stdudio Versions Text
+
+***
+
+For the clustering of the 8 songs I did not succeed to create a cluster heatmap including all the 8 songs, however i did succeed to create 2 seperate ones, for the Live and Studio versions. I tried to use a lot of helplines but Rstudio kept saying: 'Error in eval(predvars, data, env) : object 'track.name' not found' or 'duplicate ‘row.names’ are not allowed' which could be because the song titles are very similar. 
+
+***
+
+
+# Clustering Live Versions
+```{r}
+
+
+joost_url = '4afgGgLtvmGtVJI31iDcTe'
+halloween <-
+  get_playlist_audio_features("Joost Klein", joost_url) |>
+  add_audio_analysis() |>
+  mutate(
+    segments = map2(segments, key, compmus_c_transpose),
+    pitches =
+      map(segments,
+        compmus_summarise, pitches,
+        method = "mean", norm = "manhattan"
+      ),
+    timbre =
+      map(
+        segments,
+        compmus_summarise, timbre,
+        method = "mean"
+      )
+  ) |>
+  mutate(pitches = map(pitches, compmus_normalise, "clr")) |>
+  mutate_at(vars(pitches, timbre), map, bind_rows) |>
+  unnest(cols = c(pitches, timbre))
+
+
+halloween_juice <-
+  recipe(
+    track.name ~
+      danceability +
+      energy +
+      loudness +
+      speechiness +
+      acousticness +
+      instrumentalness +
+      liveness +
+      valence +
+      tempo +
+      duration +
+      C + `C#|Db` + D + `D#|Eb` +
+      E + `F` + `F#|Gb` + G +
+      `G#|Ab` + A + `A#|Bb` + B +
+      c01 + c02 + c03 + c04 + c05 + c06 +
+      c07 + c08 + c09 + c10 + c11 + c12,
+    data = halloween
+  ) |>
+  step_center(all_predictors()) |>
+  step_scale(all_predictors()) |> 
+  # step_range(all_predictors()) |> 
+  prep(halloween |> mutate(track.name = str_trunc(track.name, 20))) |>
+  juice() |>
+  column_to_rownames("track.name")
+
+
+
+halloween_dist <- dist(halloween_juice, method = "euclidean")
+
+halloween_dist |> 
+  hclust(method = "single") |> # Try single, average, and complete.
+  dendro_data() |>
+  ggdendrogram()
+
+
+
+```
+
+
+
+
+
+
+# Heatmap Live Versions
+
+
+```{r}
+heatmaply(
+  halloween_juice,
+  hclustfun = hclust,
+  hclust_method = "average",  # Change for single, average, or complete linkage.
+  dist_method = "euclidean"
+)
+```
+
+
+
+
+
+
+
+# Clustering Studio versions
+
+
+
+
+
+```{r}
+
+
+joost_url = '3saRK9UE5HSJRLBDxj2HEl'
+halloween <-
+  get_playlist_audio_features("Joost Klein", joost_url) |>
+  add_audio_analysis() |>
+  mutate(
+    segments = map2(segments, key, compmus_c_transpose),
+    pitches =
+      map(segments,
+        compmus_summarise, pitches,
+        method = "mean", norm = "manhattan"
+      ),
+    timbre =
+      map(
+        segments,
+        compmus_summarise, timbre,
+        method = "mean"
+      )
+  ) |>
+  mutate(pitches = map(pitches, compmus_normalise, "clr")) |>
+  mutate_at(vars(pitches, timbre), map, bind_rows) |>
+  unnest(cols = c(pitches, timbre))
+
+
+halloween_juice <-
+  recipe(
+    track.name ~
+      danceability +
+      energy +
+      loudness +
+      speechiness +
+      acousticness +
+      instrumentalness +
+      liveness +
+      valence +
+      tempo +
+      duration +
+      C + `C#|Db` + D + `D#|Eb` +
+      E + `F` + `F#|Gb` + G +
+      `G#|Ab` + A + `A#|Bb` + B +
+      c01 + c02 + c03 + c04 + c05 + c06 +
+      c07 + c08 + c09 + c10 + c11 + c12,
+    data = halloween
+  ) |>
+  step_center(all_predictors()) |>
+  step_scale(all_predictors()) |> 
+  # step_range(all_predictors()) |> 
+  prep(halloween |> mutate(track.name = str_trunc(track.name, 20))) |>
+  juice() |>
+  column_to_rownames("track.name")
+
+
+
+halloween_dist <- dist(halloween_juice, method = "euclidean")
+
+halloween_dist |> 
+  hclust(method = "single") |> # Try single, average, and complete.
+  dendro_data() |>
+  ggdendrogram()
+
+
+
+```
+
+
+# Heatmap Studio Versions
+
+
+```{r}
+heatmaply(
+  halloween_juice,
+  hclustfun = hclust,
+  hclust_method = "average",  # Change for single, average, or complete linkage.
+  dist_method = "euclidean"
+)
+```
+
+
+
+
+
 
 
 # Contribution
+
+***
+
+The analysis I conducted provides a lot of usable information about the differences between live and studio versions of the Led Zeppelin songs. By researching the various track-level features such as acousticness, tempo, liveness, danceability, valence, loudness, and instrumentalness, and chroma level features and self-similarity matrices, we learn a lot about the different dynamics the band used during studio and live sessions.
+
+One thing we learned, which came as no surprise, is that the live versions are much faster when compared to the studio versions of the songs. The chroma level features showed us that for the most part, the keys are much clearer to be heard in the studio versions, except there was one outlier: Kashmir. Live versions of the songs capture a kind of raw, spontaneous energy which cannot be matched by any other group. A perfect example for this is Rock n Roll, the live version is faster and more live, more energy which we can hear through the magistral voice of Robert Plant. 
+
+When diving into the songs we come across the very experimental natures of the songs: Dazed and Confused and Kashmir. Giving us very psychedelic sections where keys are hard to find, and song lengths are longer than most punk albums. The live version of Dazed and Confused offers us an extended variation for the band using bow techniques etc., a musical journey. The self-similarity matrixes give us an idea of the structures of the songs (repetition, variation, patterns), here also Dazed and Confused (Live) being the most interesting one to analyse. The bonustrack I used to analyse (Kashmir) really showcase that the band was still doing great 41 years later, they should be adressed as 'timeless'.
+
+When we take everything into consideration, this comparative study & portfolio really focusses on the dynamic interaction between the studio production and the live performance. This played a very prominent role for the band in forming the identity in the musical world. As said, the live performances really capture the raw intensity and improvisational nature, and the studio versions really highlight how much detail goes into every song. It altogether highlights that made the band one of the most listened to, adored worldwide. 
+
+***
 
 
