@@ -1,0 +1,1052 @@
+---
+title: "portfoliooo"
+output: 
+  flexdashboard::flex_dashboard:
+    storyboard: true
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+
+library(flexdashboard)
+library(tidyverse)
+library(spotifyr)
+library(compmus)
+library(plotly)
+library(dplyr)
+library(purrr)
+library(ggplot2)
+library(tidyverse)
+library(tidymodels)
+library(ggdendro)
+library(heatmaply)
+```
+
+
+
+# Background
+
+# Tracklevel Features
+
+
+
+```{r}
+
+live <- get_playlist_audio_features("", "4afgGgLtvmGtVJI31iDcTe")
+studio <- get_playlist_audio_features("", "3saRK9UE5HSJRLBDxj2HEl")
+
+```
+
+```{r}
+songs <-
+  bind_rows(
+    live |> mutate(category = "live"),
+    studio |> mutate(category = "studio")
+  )
+```
+
+
+
+
+## Tempo 
+Tempo
+
+```{r}
+songs |>
+  ggplot(aes(x = category, y = tempo)) +
+  geom_boxplot()
+```
+
+
+## Acousticness
+Acousticness
+
+```{r}
+songs |>
+  ggplot(aes(x = category, y = acousticness)) +
+  geom_boxplot()
+```
+
+
+## Liveness
+Liveness
+
+```{r}
+songs |>
+  ggplot(aes(x = category, y = liveness)) +
+  geom_boxplot()
+```
+
+
+## Danceability
+Danceability
+
+```{r}
+songs |>
+  ggplot(aes(x = category, y = danceability)) +
+  geom_boxplot()
+```
+
+
+## Valence
+Valence
+
+```{r}
+songs |>
+  ggplot(aes(x = category, y = valence)) +
+  geom_boxplot()
+```
+
+## Loudness
+Loudness
+```{r}
+songs |>
+  ggplot(aes(x = category, y = loudness)) +
+  geom_boxplot()
+```
+
+## Instrumentalness
+Instrumentalness
+```{r}
+songs |>
+  ggplot(aes(x = category, y = instrumentalness)) +
+  geom_boxplot()
+```
+
+
+
+
+
+
+
+# Chroma level features Live Versions
+
+## Stairway to heaven Live version
+
+Stairway to Heaven Live Version
+
+```{r}
+msgstairway <-
+  get_tidy_audio_analysis("3sxIm3lTgdvXJdNHNn64BS") |>
+  select(segments) |>
+  unnest(segments) |>
+  select(start, duration, pitches)
+```
+
+```{r}
+msgstairway |>
+  mutate(pitches = map(pitches, compmus_normalise, "euclidean")) |>
+  compmus_gather_chroma() |> 
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = pitch_class,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  theme_minimal() +
+  scale_fill_viridis_c()
+```
+
+
+## Rock and Roll Live at MSG 1973
+
+Rock and Roll Live at MSG 1973
+
+```{r}
+rocknrollmsg <-
+  get_tidy_audio_analysis("2SxJwk01jPkt6JnzpuY2oT") |>
+  select(segments) |>
+  unnest(segments) |>
+  select(start, duration, pitches)
+```
+
+```{r}
+rocknrollmsg |>
+  mutate(pitches = map(pitches, compmus_normalise, "euclidean")) |>
+  compmus_gather_chroma() |> 
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = pitch_class,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  theme_minimal() +
+  scale_fill_viridis_c()
+```
+
+## Dazed and Confused Live at MSG 1973
+Dazed and Confused Live at MSG 1973
+
+```{r}
+dazedmsg <-
+  get_tidy_audio_analysis("0OotzYWTwTqoszW9MrXSdZ") |>
+  select(segments) |>
+  unnest(segments) |>
+  select(start, duration, pitches)
+```
+
+```{r}
+dazedmsg |>
+  mutate(pitches = map(pitches, compmus_normalise, "euclidean")) |>
+  compmus_gather_chroma() |> 
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = pitch_class,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  theme_minimal() +
+  scale_fill_viridis_c()
+```
+
+
+## Kashmir O2 Arena Live
+Kashmir O2 Arena Live
+
+```{r}
+kashmiro2 <-
+  get_tidy_audio_analysis("4k4tFDl5rmRAA7L7gIjBTI") |>
+  select(segments) |>
+  unnest(segments) |>
+  select(start, duration, pitches)
+```
+
+
+```{r}
+kashmiro2 |>
+  mutate(pitches = map(pitches, compmus_normalise, "euclidean")) |>
+  compmus_gather_chroma() |> 
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = pitch_class,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  theme_minimal() +
+  scale_fill_viridis_c()
+```
+
+
+
+
+
+
+
+
+
+# Chroma level-features Studio Versions
+
+## Stairway to heaven Studio version
+Stairway to heaven Studio version
+
+```{r}
+stairway <-
+  get_tidy_audio_analysis("5CQ30WqJwcep0pYcV4AMNc") |>
+  select(segments) |>
+  unnest(segments) |>
+  select(start, duration, pitches)
+```
+
+```{r}
+stairway |>
+  mutate(pitches = map(pitches, compmus_normalise, "euclidean")) |>
+  compmus_gather_chroma() |> 
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = pitch_class,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  theme_minimal() +
+  scale_fill_viridis_c()
+```
+
+## Rock N Roll Studio version
+Rock N Roll Studio version
+
+```{r}
+rocknroll <-
+  get_tidy_audio_analysis("4PRGxHpCpF2yoOHYKQIEwD") |>
+  select(segments) |>
+  unnest(segments) |>
+  select(start, duration, pitches)
+```
+
+```{r}
+rocknroll |>
+  mutate(pitches = map(pitches, compmus_normalise, "euclidean")) |>
+  compmus_gather_chroma() |> 
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = pitch_class,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  theme_minimal() +
+  scale_fill_viridis_c()
+```
+
+
+## Dazed and confused studio version
+Dazed and confused studio version
+
+```{r}
+dazed <-
+  get_tidy_audio_analysis("6hu1f1cXSw7OAqhpSQ2zDy") |>
+  select(segments) |>
+  unnest(segments) |>
+  select(start, duration, pitches)
+```
+
+```{r}
+dazed |>
+  mutate(pitches = map(pitches, compmus_normalise, "euclidean")) |>
+  compmus_gather_chroma() |> 
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = pitch_class,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  theme_minimal() +
+  scale_fill_viridis_c()
+```
+
+
+## Kashmir Studio version
+Kashmir Studio version
+
+```{r}
+kashmir <-
+  get_tidy_audio_analysis("6Vjk8MNXpQpi0F4BefdTyq") |>
+  select(segments) |>
+  unnest(segments) |>
+  select(start, duration, pitches)
+```
+
+```{r}
+kashmir |>
+  mutate(pitches = map(pitches, compmus_normalise, "euclidean")) |>
+  compmus_gather_chroma() |> 
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = pitch_class,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  theme_minimal() +
+  scale_fill_viridis_c()
+```
+
+
+
+
+
+
+
+# Timbre features Cepstrograms Live Versions
+
+## Stairway to heaven Live Version
+Stairway to heaven Live Version
+
+```{r}
+msgstairway <-
+  get_tidy_audio_analysis("3sxIm3lTgdvXJdNHNn64BS") |> # Change URI.
+  compmus_align(bars, segments) |>                     # Change `bars`
+  select(bars) |>                                      #   in all three
+  unnest(bars) |>                                      #   of these lines.
+  mutate(
+    pitches =
+      map(segments,
+        compmus_summarise, pitches,
+        method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  ) |>
+  mutate(
+    timbre =
+      map(segments,
+        compmus_summarise, timbre,
+        method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  )
+```
+
+```{r}
+msgstairway |>
+  compmus_gather_timbre() |>
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = basis,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  scale_fill_viridis_c() +                              
+  theme_classic()
+```
+
+
+## Rock n Roll Live Version
+Rock n Roll Live Version
+
+```{r}
+rocknrollmsg <-
+  get_tidy_audio_analysis("2SxJwk01jPkt6JnzpuY2oT") |> # Change URI.
+  compmus_align(bars, segments) |>                     # Change `bars`
+  select(bars) |>                                      #   in all three
+  unnest(bars) |>                                      #   of these lines.
+  mutate(
+    pitches =
+      map(segments,
+        compmus_summarise, pitches,
+        method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  ) |>
+  mutate(
+    timbre =
+      map(segments,
+        compmus_summarise, timbre,
+        method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  )
+```
+
+```{r}
+rocknrollmsg |>
+  compmus_gather_timbre() |>
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = basis,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  scale_fill_viridis_c() +                              
+  theme_classic()
+```
+
+## Kashmir O2 Live Version
+Kashmir O2 Live Version
+
+```{r}
+kashmiro2 <-
+  get_tidy_audio_analysis("4k4tFDl5rmRAA7L7gIjBTI") |> # Change URI.
+  compmus_align(bars, segments) |>                     # Change `bars`
+  select(bars) |>                                      #   in all three
+  unnest(bars) |>                                      #   of these lines.
+  mutate(
+    pitches =
+      map(segments,
+        compmus_summarise, pitches,
+        method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  ) |>
+  mutate(
+    timbre =
+      map(segments,
+        compmus_summarise, timbre,
+        method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  )
+```
+
+```{r}
+kashmiro2 |>
+  compmus_gather_timbre() |>
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = basis,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  scale_fill_viridis_c() +                              
+  theme_classic()
+```
+
+
+
+
+## Dazed and confused Live Version
+Dazed and confused Live Version
+
+```{r}
+dazedmsg <-
+  get_tidy_audio_analysis("0OotzYWTwTqoszW9MrXSdZ") |> # Change URI.
+  compmus_align(bars, segments) |>                     # Change `bars`
+  select(bars) |>                                      #   in all three
+  unnest(bars) |>                                      #   of these lines.
+  mutate(
+    pitches =
+      map(segments,
+        compmus_summarise, pitches,
+        method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  ) |>
+  mutate(
+    timbre =
+      map(segments,
+        compmus_summarise, timbre,
+        method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  )
+```
+
+```{r}
+dazedmsg |>
+  compmus_gather_timbre() |>
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = basis,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  scale_fill_viridis_c() +                              
+  theme_classic()
+```
+
+
+
+
+
+
+# Timbre features Cepstrograms Studio Versions
+
+## Stairway to heaven studio version
+Stairway to heaven studio version
+
+```{r}
+stairway <-
+  get_tidy_audio_analysis("5CQ30WqJwcep0pYcV4AMNc") |> # Change URI.
+  compmus_align(bars, segments) |>                     # Change `bars`
+  select(bars) |>                                      #   in all three
+  unnest(bars) |>                                      #   of these lines.
+  mutate(
+    pitches =
+      map(segments,
+        compmus_summarise, pitches,
+        method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  ) |>
+  mutate(
+    timbre =
+      map(segments,
+        compmus_summarise, timbre,
+        method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  )
+```
+
+```{r}
+stairway |>
+  compmus_gather_timbre() |>
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = basis,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  scale_fill_viridis_c() +                              
+  theme_classic()
+```
+
+
+## Rock n Roll Studio Version
+Rock n Roll Studio Version
+
+```{r}
+rocknroll <-
+  get_tidy_audio_analysis("4PRGxHpCpF2yoOHYKQIEwD") |> # Change URI.
+  compmus_align(bars, segments) |>                     # Change `bars`
+  select(bars) |>                                      #   in all three
+  unnest(bars) |>                                      #   of these lines.
+  mutate(
+    pitches =
+      map(segments,
+        compmus_summarise, pitches,
+        method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  ) |>
+  mutate(
+    timbre =
+      map(segments,
+        compmus_summarise, timbre,
+        method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  )
+```
+
+```{r}
+rocknroll |>
+  compmus_gather_timbre() |>
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = basis,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  scale_fill_viridis_c() +                              
+  theme_classic()
+```
+
+
+## Dazed and confused studio version
+Dazed and confused studio version
+
+```{r}
+dazed <-
+  get_tidy_audio_analysis("6hu1f1cXSw7OAqhpSQ2zDy") |> # Change URI.
+  compmus_align(bars, segments) |>                     # Change `bars`
+  select(bars) |>                                      #   in all three
+  unnest(bars) |>                                      #   of these lines.
+  mutate(
+    pitches =
+      map(segments,
+        compmus_summarise, pitches,
+        method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  ) |>
+  mutate(
+    timbre =
+      map(segments,
+        compmus_summarise, timbre,
+        method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  )
+```
+
+```{r}
+dazed |>
+  compmus_gather_timbre() |>
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = basis,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  scale_fill_viridis_c() +                              
+  theme_classic()
+```
+
+
+## Kashmir studio version
+Kashmir studio version
+
+```{r}
+kashmir <-
+  get_tidy_audio_analysis("6Vjk8MNXpQpi0F4BefdTyq") |> # Change URI.
+  compmus_align(bars, segments) |>                     # Change `bars`
+  select(bars) |>                                      #   in all three
+  unnest(bars) |>                                      #   of these lines.
+  mutate(
+    pitches =
+      map(segments,
+        compmus_summarise, pitches,
+        method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  ) |>
+  mutate(
+    timbre =
+      map(segments,
+        compmus_summarise, timbre,
+        method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  )
+```
+
+```{r}
+kashmir |>
+  compmus_gather_timbre() |>
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = basis,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  scale_fill_viridis_c() +                              
+  theme_classic()
+```
+
+
+
+# Timbre: Self-Similarity Matrixes Live Versions
+
+## Stairway to heaven LIve version
+Stairway to heaven LIve version
+
+```{r}
+msgstairway |>
+  compmus_self_similarity(timbre, "cosine") |> 
+  ggplot(
+    aes(
+      x = xstart + xduration / 2,
+      width = xduration,
+      y = ystart + yduration / 2,
+      height = yduration,
+      fill = d
+    )
+  ) +
+  geom_tile() +
+  coord_fixed() +
+  scale_fill_viridis_c(guide = "none") +
+  theme_classic() +
+  labs(x = "", y = "")
+```
+
+`
+
+## Rock n Roll Live version
+Rock n Roll Live version
+
+```{r}
+rocknrollmsg |>
+  compmus_self_similarity(timbre, "cosine") |> 
+  ggplot(
+    aes(
+      x = xstart + xduration / 2,
+      width = xduration,
+      y = ystart + yduration / 2,
+      height = yduration,
+      fill = d
+    )
+  ) +
+  geom_tile() +
+  coord_fixed() +
+  scale_fill_viridis_c(guide = "none") +
+  theme_classic() +
+  labs(x = "", y = "")
+```
+
+
+
+## Dazed and confused Live version 
+Dazed and confused Live version 
+
+```{r}
+dazedmsg |>
+  compmus_self_similarity(timbre, "cosine") |> 
+  ggplot(
+    aes(
+      x = xstart + xduration / 2,
+      width = xduration,
+      y = ystart + yduration / 2,
+      height = yduration,
+      fill = d
+    )
+  ) +
+  geom_tile() +
+  coord_fixed() +
+  scale_fill_viridis_c(guide = "none") +
+  theme_classic() +
+  labs(x = "", y = "")
+```
+
+## Kashmir O2 Live version
+Kashmir O2 Live version
+
+```{r}
+kashmiro2 |>
+  compmus_self_similarity(timbre, "cosine") |> 
+  ggplot(
+    aes(
+      x = xstart + xduration / 2,
+      width = xduration,
+      y = ystart + yduration / 2,
+      height = yduration,
+      fill = d
+    )
+  ) +
+  geom_tile() +
+  coord_fixed() +
+  scale_fill_viridis_c(guide = "none") +
+  theme_classic() +
+  labs(x = "", y = "")
+```
+
+
+
+
+# Timbre: Self-Similarity Matrixes Studio Versions
+
+## Stairway to heaven studio version
+Stairway to heaven studio version
+
+```{r}
+stairway |>
+  compmus_self_similarity(timbre, "cosine") |> 
+  ggplot(
+    aes(
+      x = xstart + xduration / 2,
+      width = xduration,
+      y = ystart + yduration / 2,
+      height = yduration,
+      fill = d
+    )
+  ) +
+  geom_tile() +
+  coord_fixed() +
+  scale_fill_viridis_c(guide = "none") +
+  theme_classic() +
+  labs(x = "", y = "")
+```
+
+
+## Rock n Roll Studio Version
+Rock n Roll Studio Version
+
+```{r}
+rocknroll |>
+  compmus_self_similarity(timbre, "cosine") |> 
+  ggplot(
+    aes(
+      x = xstart + xduration / 2,
+      width = xduration,
+      y = ystart + yduration / 2,
+      height = yduration,
+      fill = d
+    )
+  ) +
+  geom_tile() +
+  coord_fixed() +
+  scale_fill_viridis_c(guide = "none") +
+  theme_classic() +
+  labs(x = "", y = "")
+```
+
+
+## Dazed and confused studio version
+Dazed and confused studio version
+
+```{r}
+dazed |>
+  compmus_self_similarity(timbre, "cosine") |> 
+  ggplot(
+    aes(
+      x = xstart + xduration / 2,
+      width = xduration,
+      y = ystart + yduration / 2,
+      height = yduration,
+      fill = d
+    )
+  ) +
+  geom_tile() +
+  coord_fixed() +
+  scale_fill_viridis_c(guide = "none") +
+  theme_classic() +
+  labs(x = "", y = "")
+```
+
+
+## Kashmir studio version
+Kashmir studio version
+
+```{r}
+kashmir |>
+  compmus_self_similarity(timbre, "cosine") |> 
+  ggplot(
+    aes(
+      x = xstart + xduration / 2,
+      width = xduration,
+      y = ystart + yduration / 2,
+      height = yduration,
+      fill = d
+    )
+  ) +
+  geom_tile() +
+  coord_fixed() +
+  scale_fill_viridis_c(guide = "none") +
+  theme_classic() +
+  labs(x = "", y = "")
+```
+
+
+
+
+# Temporal (zie chromatic zooi)
+
+
+
+
+
+
+
+
+
+
+# Loudness
+
+## Stairway to Heaven
+
+```{r}
+
+msgstairway <- get_track_audio_features("3sxIm3lTgdvXJdNHNn64BS")
+stairway <- get_track_audio_features("5CQ30WqJwcep0pYcV4AMNc")
+
+```
+
+```{r}
+songs <-
+  bind_rows(
+    msgstairway |> mutate(category = "Stairway to Heaven live version"),
+    stairway |> mutate(category = "Stairway to Heaven studio version")
+  )
+```
+
+
+```{r}
+songs |>
+  ggplot(aes(x = category, y = loudness)) +
+  geom_boxplot()
+```
+
+
+## Rock n roll
+
+```{r}
+
+rocknrollmsg <- get_track_audio_features("2SxJwk01jPkt6JnzpuY2oT")
+rocknroll <- get_track_audio_features("4PRGxHpCpF2yoOHYKQIEwD")
+
+```
+
+```{r}
+songs <-
+  bind_rows(
+    rocknrollmsg |> mutate(category = "Rock n roll live version"),
+    rocknroll |> mutate(category = "Rock n roll studio version")
+  )
+```
+
+
+```{r}
+songs |>
+  ggplot(aes(x = category, y = loudness)) +
+  geom_boxplot()
+```
+
+
+## Dazed and confused
+
+
+```{r}
+
+dazedmsg <- get_track_audio_features("0OotzYWTwTqoszW9MrXSdZ")
+dazed <- get_track_audio_features("6hu1f1cXSw7OAqhpSQ2zDy")
+
+```
+
+```{r}
+songs <-
+  bind_rows(
+    dazedmsg |> mutate(category = "Dazed and confused live version"),
+    dazed |> mutate(category = "Dazed and confused studio version")
+  )
+```
+
+
+```{r}
+songs |>
+  ggplot(aes(x = category, y = loudness)) +
+  geom_boxplot()
+```
+
+
+## Kashmir
+
+
+```{r}
+
+kashmiro2 <- get_track_audio_features("4k4tFDl5rmRAA7L7gIjBTI")
+kashmir <- get_track_audio_features("6Vjk8MNXpQpi0F4BefdTyq")
+
+```
+
+```{r}
+songs <-
+  bind_rows(
+    kashmiro2 |> mutate(category = "Kashmir live version"),
+    kashmir |> mutate(category = "Kashmir studio version")
+  )
+```
+
+
+```{r}
+songs |>
+  ggplot(aes(x = category, y = loudness)) +
+  geom_boxplot()
+```
+
+
+
+# Clustering
+
+
+
+## Hierarchical clustering
+
+
+# Contribution
+
+
